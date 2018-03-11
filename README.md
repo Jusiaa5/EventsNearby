@@ -20,7 +20,7 @@ You can specify:
 * Google Directions API
 
 # Demo
-[https://users.metropolia.fi/~justynam/EventsNearby/]
+https://users.metropolia.fi/~justynam/EventsNearby/
 
 # Implementation
 * JavaScript
@@ -30,4 +30,4 @@ You can specify:
 * Bootstrap
 
 # License
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the [LICENSE.md] file for details
