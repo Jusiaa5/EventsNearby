@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events nearby application</title>
+    <link rel="stylesheet" type="text/css" href="resources/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="vendors/bootstrap/bootstrap-clockpicker.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?&key=AIzaSyBa5FiD7kzUq5AH5Lhbiue7dvOyU1-IBXs&language=en"
+            defer></script>
+    <script type="text/javascript" src="resources/js/events.js" defer></script>
+    <script type="text/javascript" src="resources/js/transport.js" defer></script>
+    <script src="vendors/pb2/pb2_client.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>-->
+    <script type="text/javascript" src="vendors/bootstrap/bootstrap-clockpicker.js"></script>
+    <script type="text/javascript" src="vendors/jquery/jquery-clockpicker.js" defer></script>
+    <script type="text/css" src="vendors/jquery/jquery-clockpicker.css" defer></script>
+    <script type="text/javascript" src="vendors/bootstrap/bootstrap-clockpicker.js" defer></script>
+    <script type="text/css" src="vendors/bootstrap/bootstrap-clockpicker.css" defer></script>
+
+
+</head>
+<body>
+
+<header>
+    <h1>
+        <p1>Events</p1>
+        <p2> nearby</p2>
+    </h1>
+    <p>For tonight!</p>
+
+</header>
+<main>
+
+    <div id="nicknameDiv">
+        <form id="nicknameForm">
+            <input type="text" id="nicknameField" placeholder="Enter your nickname">
+            <button class="myButton" type="submit" id="saveNicknameButton">Start!</button>
+        </form>
+    </div>
+
+    <div id="searchingFormDiv" style="display: none;">
+        <form id="searchingForm">
+            <input type="text" name="searchPlace" id="searchField" placeholder="Location">
+            <input type="text" name="searchPlace" id="specifiedField" placeholder="Title or keyword">
+            <button class="myButton" type="submit" id="submitButton">Search!</button>
+        </form>
+    </div>
+
+    <div class="loaderDiv">
+        <div class="loader" id="loader" style="display: none;"></div>
+    </div>
+
+    <div id="contentDiv" class="content" style="display: none;">
+        <div id="wrongResponseDiv" class="header" style="display: none;">
+            <h1>Uuuuups!</h1>
+            <h2>Your searching does not match any results!</h2>
+        </div>
+        <div id="eventsListDiv">
+            <table id="eventsTable">
+                <caption id="tableHead"></caption>
+            </table>
+            <input type="button" class="myButton" id="saveButton" name="Save" value="Next">
+        </div>
+    </div>
+
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <p></p>
+            <span class="close">&times;</span>
+        </div>
+    </div>
+
+    <div id="contentDivTwo" class="content" style="display: none;">
+        <div id="eventNameHeader" class="header">
+        </div>
+        <div id="optionsDiv">
+            <div id="transportDiv">
+                <form id="transportForm">
+                    <button type='button' class="btn" id="carButton">
+                        <i class="fa fa-car fa-2x"></i>
+                    </button>
+                    <button type='button' class="btn" id="publicTrButton">
+                        <i class="fa fa-subway fa-2x"></i>
+                    </button>
+                    <button type='button' class="btn" id="walkButton">
+                        <i class="fa fa-male fa-2x"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div id="departuresDetailsDiv">
+                <div id="departureDiv">
+                    <form id="departureForm">
+                        <div id="departureTimeDiv">
+                            <div class="clock"></div>
+                            <div class="input-group clockpicker">
+                                <input type="text" class="form-control" value="09:30">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                               </span>
+                            </div>
+
+
+                            <div class="departureCheckbox" id="departureTimeCheckboxDiv">
+                                <input type="checkbox" name="departureCheckbox" id="departureCheckbox"
+                                       onchange="handleNowCheckbox(this)">
+                                <label for="departureCheckbox">Now</label>
+                            </div>
+                        </div>
+
+                        <div id="locationDetailsDiv">
+
+                            <input type="text" name="location" id="locationField" placeholder="Location"
+                                   onkeyup="changeCheckboxValue(this)">
+
+                            <div class="departureCheckbox">
+                                <input type="checkbox" name="locationCheckbox" id="geolocationCheckbox"
+                                       onchange="handleCheckboxChange(this)">
+                                <label for="departureCheckbox">Use my current location</label>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="myButton" value="Search" id="departureButton" disabled="true">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="mapDetailsDiv" style="display: none;">
+            <div id="map"></div>
+            <div id="direction_panel"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="eventful-badge eventful-medium">
+            <img src="http://api.eventful.com/images/powered/eventful_88x31.gif"
+                 alt="Local Events, Concerts, Tickets">
+            <p><a href="http://eventful.com/">Events</a> by Eventful</p>
+        </div>
+        <br>
+    </div>
+
+</main>
+
+
+</body>
+</html>
+
