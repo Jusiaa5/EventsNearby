@@ -5,19 +5,26 @@ Events Nearby for Tonight JavaScript web application
 This application was developed within the scope of Application Programming Interfaces for the Web at the Metropolia University in Helsinki
 
 # Functionalities
-Events Nearby for Tonight allows you to find list of events that are taking place today
+Events Nearby for Tonight allows you to find list of events that are taking place today  
+
 You can search for events via:
   * location
   * keyword or title
-It also gives possibility to find a route to chosen event's place
+It also gives possibility to find a route to chosen event's place  
+
 You can specify:
 * mean of tranposrt
 * departure time
 * departure location
 
+By provided nickname you can see how is interested in given event.
+
 # APIs
 * Eventful API
 * Google Directions API
+
+# Websockets
+[pb2 client](https://github.com/OAlm/pb2)
 
 # Demo
 https://users.metropolia.fi/~justynam/EventsNearby/
