@@ -22,6 +22,7 @@ By provided nickname you can see how is interested in given event.
 # APIs
 * Eventful API
 * Google Directions API
+* HTML5 Geolocation API
 
 # Websockets
 [pb2 client](https://github.com/OAlm/pb2)
