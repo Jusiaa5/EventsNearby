@@ -6,7 +6,7 @@ let pb2;
 let nickname;
 
 function initFindEventListener() {
-    pb2 = new PB2('https://pb2-2018.jelastic.metropolia.fi/', 'first_app_1921');
+    pb2 = new PB2('https://jusiaa5.github.io/EventsNearby/index.html', 'events_nearby');
 
     const saveNicknameButton = document.getElementById('saveNicknameButton');
     saveNicknameButton.addEventListener('click', onSubmitNickname);
