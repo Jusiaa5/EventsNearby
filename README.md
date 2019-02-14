@@ -1,9 +1,6 @@
 # Events Nearby for Tonight
 Events Nearby for Tonight JavaScript web application
 
-# Details
-This application was developed within the scope of Application Programming Interfaces for the Web at the Metropolia University in Helsinki
-
 # Functionalities
 Events Nearby for Tonight allows you to find list of events that are taking place today  
 
